@@ -30,11 +30,8 @@ app.post("/urls", (req, res) => {
   console.log(req.body.longURL);  
   urlDatabase[shortURL] = req.body.longURL;
   console.log(urlDatabase);// debug statement to see POST parameters
-  if (shortURL === undefined) {
-    console.log("Not url");
-  } else {
-  res.redirect(`urls/${shortURL}`)  
-  }    // Respond with 'Ok' (we will replace this)
+  res.redirect(302, `urls/${shortURL}`)  
+   // Respond with 'Ok' (we will replace this)
 });
 
 app.get("/urls/:id", (req, res) => {
@@ -43,14 +40,19 @@ app.get("/urls/:id", (req, res) => {
   
   res.render("urls_show", templateVars);
 });
-app.get("/:id", (req, res) => {
-  let longURL = urlDatabase[req.params.id] 
-  if (longURL === undefined) {
-   console.log("Not a URL");
-} else {
 
-  res.redirect(longURL);
-}
+app.get("/error", (req, res) => {
+  res.render("error");
+
+});
+
+app.get("/:id", (req, res) => {
+  let longURL = urlDatabase[req.params.id];
+  if (urlDatabase[req.params.id] === undefined) {
+    res.redirect("/error");
+  } else {
+    res.redirect(longURL);
+  }
 });
 
 
