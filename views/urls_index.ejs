@@ -5,8 +5,13 @@
 </head>
 <body>
 <ul>
-<% Object.keys(urls).forEach((key) => { %>
-<li><a href="<%= urls[key] %>"> <%= key %></a> </li>
+<% Object.keys(urls).forEach((shortURL) => { %>
+<li><a href="<%= urls[shortURL] %>"> <%= shortURL %></a>
+<form action="/urls/<%= shortURL %>?_method=DELETE" method="post">
+<button name="Delete" type="submit">Delete</button>
+
+</form>
+</li>
 <% }); %>
 </ul>
 </body>
