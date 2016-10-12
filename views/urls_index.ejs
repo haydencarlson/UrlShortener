@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+<ul>
+<% Object.keys(urls).forEach((key) => { %>
+<li><a href="<%= urls[key] %>"> <%= key %></a> </li>
+<% }); %>
+</ul>
+</body>
+</html>
