@@ -1,0 +1,137 @@
+h2 {
+  font-size: 100px;
+  color: white;
+  font-family: Montserrat;
+  text-align: center;
+}
+h1 {
+  font-size: 50px;
+  color: white;
+  font-family: Montserrat;
+  text-align: center;
+
+}
+.site__container {
+  padding: 200px;
+}
+p {
+  font-size: 50px;
+  color: white;
+  font-family: Montserrat;
+  text-align: center;
+}
+
+body {
+  background-image: url("https://wallpaperscraft.com/image/blue_color_background_sea_wall_wave_72426_3840x2400.jpg");
+  background-size: cover;
+}
+#formContainer {
+  margin: 0px auto;
+  display: block;
+  text-align: center;
+  
+}
+.url__show__updatecontainer {
+  margin: 0px auto;
+  display: block;
+  text-align: center;
+}
+
+.interlock__guys {
+  margin: 0px auto;
+  display: block;
+  text-align: center;
+  position: relative;
+  width: 700px;
+}
+
+#longURL{
+  border: none;
+  outline: 0;
+-moz-border-radius: 10px;
+-webkit-border-radius:10px;
+border-radius: 10px;
+width:100%; 
+height: 70px;
+}
+
+.url__show__inputform {
+  height: 75px;
+  width: 400px;
+  font-family:Montserrat;
+  font-size: 20px;
+  font-weight: bold;
+  outline: 0;
+  border: none;
+  -moz-border-radius: 10px;
+-webkit-border-radius: 10px;
+border-radius: 10px;
+}
+
+#submitButton {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  font-family:Montserrat;
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 5px;
+  outline: 0;
+  border: none;
+  transition-duration: 0.8s;
+  -moz-border-radius: 10px;
+-webkit-border-radius: 10px;
+border-radius: 10px;
+  width : 200px; 
+  height: 70px;
+}    
+#submitButton:hover {
+  transition-duration: 0.8s;
+    background-color: #7aa7ef; /* Green */
+    color: white;
+}
+.url__show__updatebutton {
+font-family:Montserrat;
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  outline: 0;
+  border: none;
+  transition-duration: 0.8s;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  width : 200px; 
+  height: 75px; 
+}
+.url__show__updatebutton:hover {
+  transition-duration: 0.8s;
+    background-color: #7aa7ef; /* Green */
+    
+}
+#labelcs {
+  margin-top:202px;
+  font-size: 50px; 
+  font-family: Montserrat; 
+  color: white; 
+  font-weight: bold; 
+  
+}
+input[type="text"] {
+  padding-left: 10px;
+  font-size:20px;
+  font-family:Montserrat;
+  font-weight:bold;
+
+}
+
+input.url__show__inputform: -moz-placeholder {
+  padding-left: 2px; 
+  font-size: 20px; 
+  font-family:Montserrat; 
+  font-weight:bold;
+}
+::-webkit-input-placeholder { padding-left: 2px; font-size: 20px; font-family:Montserrat; font-weight:bold; }
+::-moz-placeholder { font-size: 20px; font-family:Montserrat; font-weight:bold; } /* firefox 19+ */
+:-ms-input-placeholder { font-size: 20px; font-family:Montserrat; font-weight:bold; } /* ie */
+input:-moz-placeholder { font-size: 20px; font-family:Montserrat; font-weight:bold; }

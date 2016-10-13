@@ -1,8 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+  <link rel="stylesheet" type="text/css" href="/styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+</head>
 <body>
-Here is your short URL: <ul><li><a href="<% shortURL %>"> <%= shortURL %></a>
-</li></ul>
 
+<h1 class="url__show__shorturl">Here is your short URL: <a href="<% shortURL %>"> <%= shortURL %></a></h1>
+<h1 class="url__show__longurl">Here is the long URL: <a href="<%= longURL %>"><%= longURL %> </a></h1>
+<center>
+<div class="site__container">
+<div class="url__show_updatecontainer">
+  <form class="url_show_updateform" action="/urls/<%= shortURL %>?_method=PUT" method="post">
+    <p>Update URL</p>
+  <input class="url__show__inputform" name="updateURL" placeholder="<%= longURL %>" value=""></input>
+  <button class="url__show__updatebutton"> Update URL </button>
+  </form>
+</div>
+</div>
+</center>
 </body>
 </html>

@@ -13,9 +13,8 @@ var urlDatabase = {
 
 
 app.set('view engine', 'ejs');
-
+app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: false}));
-
 app.use(methodOverride("_method"));
 
 
@@ -45,9 +44,8 @@ app.get("/urls", (req, res) => {
 
 //show url by id
 app.get("/urls/:id", (req, res) => {
-  let templateVars = { shortURL: req.params.id };
+  let templateVars = { shortURL: req.params.id, longURL: urlDatabase[req.params.id] };
   console.log(templateVars);
-  
   res.render("urls_show", templateVars);
 });
 
@@ -65,7 +63,13 @@ app.get("/:id", (req, res) => {
     res.redirect(longURL);
   }
 });
+//UPDATE - U
 
+app.put("/urls/:id", (req, res) => {
+
+urlDatabase[req.params.id] = req.body.updateURL;
+res.redirect(`/urls/${req.params.id}`);
+})
 
 //DELETE -D
 app.delete("/urls/:shortURL", (req, res) => {
