@@ -3,6 +3,11 @@ const bodyParser = require("body-parser");
 const app = express();
 const PORT = app.set('port', 8080);
 const methodOverride = require('method-override');
+const cookieParser = require('cookie-parser');
+
+
+
+
 
 var urlDatabase = {
   "b2xVn2": "http://www.lighthouselabs.ca",
@@ -16,13 +21,23 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(methodOverride("_method"));
+app.use(cookieParser());
+// app.use(Cookies());
+
 
 
 
 //where to create new urls
 //CREATE - C
 app.get("/", (req, res) => {
-  res.render("urls_new");
+
+ let username = {username: req.cookies['username'] || "error" };
+ if (req.cookies['username'] === undefined) {
+  res.redirect("/login");
+ } else {
+  res.render("urls_new", username);
+  }
+
 });
 
 //add url to database 
@@ -36,6 +51,26 @@ app.post("/urls", (req, res) => {
   res.redirect(302, `urls/${shortURL}`)  
    // Respond with 'Ok' (we will replace this)
 });
+
+app.post("/logout", (req, res) => {
+ 
+  res.clearCookie("username");
+  res.redirect("/");
+});
+ 
+app.post("/login", (req, res) => {
+ res.cookie("username", req.body.username);
+ res.redirect(302, "/");
+
+});
+
+app.get("/login", (req, res) => {
+
+res.render("login");
+});
+
+
+
 //RETRIEVE - R
 app.get("/urls", (req, res) => {
   let templateVars = { urls: urlDatabase };
@@ -67,8 +102,8 @@ app.get("/:id", (req, res) => {
 
 app.put("/urls/:id", (req, res) => {
 
-urlDatabase[req.params.id] = req.body.updateURL;
-res.redirect(`/urls/${req.params.id}`);
+  urlDatabase[req.params.id] = req.body.updateURL;
+  res.redirect(`/urls/${req.params.id}`);
 })
 
 //DELETE -D
