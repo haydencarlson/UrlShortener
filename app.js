@@ -14,6 +14,8 @@ var urlDatabase = {
   "9sm5xK": "http://www.google.com"
 };
 
+var users = {};
+
 
 
 
@@ -30,14 +32,18 @@ app.use(cookieParser());
 //where to create new urls
 //CREATE - C
 app.get("/", (req, res) => {
+//fix
+ // let username = users.email
 
- let username = {username: req.cookies['username'] || "error" };
- if (req.cookies['username'] === undefined) {
-  res.redirect("/login");
- } else {
-  res.render("urls_new", username);
-  }
+ console.log("home");
+  res.render("urls_new");
+  
 
+});
+
+app.get("/register", (req, res) => {
+
+  res.redirect("/");
 });
 
 //add url to database 
@@ -52,21 +58,74 @@ app.post("/urls", (req, res) => {
    // Respond with 'Ok' (we will replace this)
 });
 
-app.post("/logout", (req, res) => {
+app.post("/register", (req, res) => {
+
+  const randomuserid = generateRandomID();
+
  
+  for (let userID in users){
+
+    let user = users[userID]
+
+    if (user.email === req.body.email) {
+      return res.redirect(404, "error");
+    }
+  }
+
+  if (req.body.email === "" || undefined) {
+
+   res.redirect('error');
+
+  } else if (req.body.password === "" || undefined) {
+
+   res.redirect('error');
+  }
+
+  res.cookie("user_id", randomuserid);
+  res.cookie("email", req.body.email)
+
+  const user = {
+    id: randomuserid,
+    email: req.body.email,
+    password: req.body.password
+  }
+
+
+  users[randomuserid] = user;  
+  res.redirect("login");
+
+});
+
+app.post("/logout", (req, res) => {
+
+
   res.clearCookie("username");
   res.redirect("/");
 });
  
 app.post("/login", (req, res) => {
- res.cookie("username", req.body.username);
- res.redirect(302, "/");
 
+console.log("this works");
+  for (let userID in users){
+console.log("this works 1");
+    let user = users[userID]
+
+    if (user.email === req.body.email && user.password === req.body.password ) {
+  
+      console.log("checking id");
+     res.redirect("/", username);
+
+    } else {
+    res.redirect("/register");
+    }
+  }
+   
+  
 });
 
 app.get("/login", (req, res) => {
 
-res.render("login");
+res.redirect("/");
 });
 
 
@@ -88,6 +147,7 @@ app.get("/error", (req, res) => {
   res.render("error");
 
 });
+app.get('/users', (req, res) => res.json(users))
 
 //redirect to id if id is valid in database
 app.get("/:id", (req, res) => {
@@ -130,3 +190,13 @@ const generateRandomString = () => {
         randomString += possible.charAt(Math.floor(Math.random() * possible.length));
   return  randomString;
 };
+
+const generateRandomID = () => {
+  let randomID = "";
+  var possible = "0123456789";
+
+    for( let i=0; i < 5; i++ )
+        randomID += possible.charAt(Math.floor(Math.random() * possible.length));
+  return  randomID;
+};
+

@@ -20,6 +20,9 @@ h1 {
 .login__site_container {
   padding: 200px;
 }
+.register__container {
+  padding: 350px;
+}
 p {
   font-size: 50px;
   color: white;
@@ -27,8 +30,16 @@ p {
   text-align: center;
 }
 body {
-  background-image: url("https://wallpaperscraft.com/image/blue_color_background_sea_wall_wave_72426_3840x2400.jpg");
-  background-size: cover;
+  background: url(http://www.pixelstalk.net/wp-content/uploads/2016/07/Photos-Plain-HD-Download.jpg) no-repeat center center fixed;
+   
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+body::after {
+
+
 }
 #formContainer {
   margin: 0px auto;
@@ -96,6 +107,40 @@ margin: 0px auto;
   width:100%; 
   height: 70px;
 }
+.register__email {
+  border: none;
+  outline: 0;
+ -moz-border-radius: 10px;
+ -webkit-border-radius:10px;
+  border-radius: 10px;
+  width:400px; 
+  height: 40px;
+}
+.register__password {
+
+ margin: 10px;
+  outline: 0;
+ -moz-border-radius: 10px;
+ -webkit-border-radius:10px;
+  border-radius: 10px;
+  width:400px; 
+  height: 40px;
+
+}
+.register__button {
+  font-family:Montserrat;
+  font-size: 20px;
+  font-weight: bold;
+  outline: 0;
+  transition-duration: 0.8s;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  width : 200px; 
+  height: 70px;
+}
+
+
 
 .url__show__inputform {
   height: 65px;

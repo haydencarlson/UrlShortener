@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
   <title>Login</title>
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="/styles.css">
-</head>
+  </head>
 
-<body>
+  <body>
 
 
 
-<center>
+  <center>
 
-<div class="login__site_container">
-  <form action="/login" method="post">
-<p class="username">Username: </p>
-<input class="login__page__input" name="username">  
 
-<button class="login__page__button" name="submit" value="Sign in">Sign in </button>
-</form>
-</div>
+  <div class="login__site_container">
+    <form action="/login" method="post">
+      <p class="username">Email: </p>
+      <input class="login__page__input" type="email" name="email">  
+      <p class="username">Password: </p>
+      <input style="height:50px;" class="login__page__password" type="password" name="password">
+      </br>
+      <button class="login__page__button" name="submit" value="Sign in">Sign in </button>
+    </form>
+  </div>
 </center>
-</body>
+  </body>
 </html>
