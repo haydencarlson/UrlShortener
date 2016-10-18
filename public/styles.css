@@ -11,6 +11,12 @@ h1 {
   text-align: center;
 
 }
+#logout_trigger {
+  float: right;
+  border:none;
+  line-height:52px;
+  width:120px;
+}
 .site__container {
   padding: 200px;
 }
@@ -30,7 +36,7 @@ p {
   text-align: center;
 }
 body {
-  background: url(http://www.pixelstalk.net/wp-content/uploads/2016/07/Photos-Plain-HD-Download.jpg) no-repeat center center fixed;
+  background: url(thebackground.jpg) no-repeat center center fixed;
    
     -webkit-background-size: cover;
     -moz-background-size: cover;

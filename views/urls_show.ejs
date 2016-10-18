@@ -48,7 +48,7 @@
 <p class="url__show__shorturl">Here is your short URL: <a href="<% shortURL %>">
   <span class="anchor">
   <div class="copyurl__container">
-    <input type="text" class="shorturl__container" readonly="true" value="http://localhost:8080/<%= shortURL %>" />
+    <input type="text" class="shorturl__container" readonly="true" value="http://localhost:8080/r/<%= shortURL %>" />
 <button class="shorturl__show__copy"data-copytarget=".shorturl__container">copy</button>
 </div>
   </span>
@@ -63,12 +63,20 @@
 
   <form class="url_show_updateform" action="/urls/<%= shortURL %>?_method=PUT" method="post">
     <p class="p__" >Update URL</p>
+
+
     <a>
     <div class="update__url__container">
   <input class="url__show__inputform" name="updateURL" placeholder="Current URL: <%= longURL %>" value=""></input>
   <button class="url__show__updatebutton"> Update URL </button>
   </div>
   </form>
+
+ <ul> <% for (user in usersUrls) { %>
+
+    <li>  <%= user %></li>
+    
+<% } %></ul>
   </a>
 </div>
 </div>

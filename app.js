@@ -1,30 +1,32 @@
+
 const express = require('express');
 const bodyParser = require("body-parser");
+const bcrypt = require('bcrypt');
 const app = express();
 const PORT = app.set('port', 8080);
 const methodOverride = require('method-override');
-const cookieParser = require('cookie-parser');
+const cookieSession = require('cookie-session')
 
+var hash;
 var urlDatabase = {
-  "b2xVn2": {originalURL: "http://www.lighthouselabs.ca", userID: 'sdf'},
-  "9sm5xK": "http://www.google.com"
-};
+    "b2xVn2": "http://www.lighthouselabs.ca",
+    "9sm5xK": "http://www.google.com"
+    };
 var users = {};
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
-app.use(bodyParser.urlencoded({
-  extended: false
-}));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(methodOverride("_method"));
-app.use(cookieParser());
-// app.use(Cookies());
+app.use(cookieSession({
+  name: 'session',
+  keys: ['key1', 'key2']
+}));
 
-//where to create new urls
+
 //CREATE - C
 app.get("/", (req, res) => {
-  //fix
-  // let username = users.emai
+ 
   res.render("urls_new");
 
 });
@@ -37,10 +39,14 @@ app.get("/register", (req, res) => {
 app.post("/urls", (req, res) => {
   // var parsedObj = JSON.parse(req.body;
   var shortURL = generateRandomString(req.body.longURL);
+  const userIDCache = req.session.user_id;
   console.log(shortURL);
   console.log(req.body.longURL);
-  urlDatabase[shortURL] = req.body.longURL;
-  urlDatabase.userID = req.cookies.user_id;
+  if (userIDCache !== undefined) {
+    users[userIDCache].urls[shortURL] = req.body.longURL;
+
+  }
+ 
   console.log(urlDatabase); // debug statement to see POST parameters
   res.redirect(302, `urls/${shortURL}`)
     // Respond with 'Ok' (we will replace this)
@@ -66,15 +72,14 @@ app.post("/register", (req, res) => {
     res.redirect('error');
   }
 
-  res.cookie("user_id", randomuserid);
-  res.cookie("email", req.body.email)
 
-
-
+  req.session.user_id = randomuserid;
   const user = {
     id: randomuserid,
     email: req.body.email,
-    password: req.body.password
+    password: hash = bcrypt.hashSync(req.body.password, 10),
+    urls: {}
+
   }
 
 
@@ -84,9 +89,7 @@ app.post("/register", (req, res) => {
 });
 
 app.post("/logout", (req, res) => {
-
-
-  res.clearCookie("username");
+  req.session = null;
   res.redirect("/");
 });
 
@@ -97,13 +100,13 @@ app.post("/login", (req, res) => {
     console.log("this works 1");
     let user = users[userID]
 
-    if (user.email === req.body.email && user.password === req.body.password) {
+    if (user.email === req.body.email && bcrypt.compareSync(req.body.password, hash)) {
 
       console.log("checking id");
       res.redirect("/");
 
     } else {
-      res.redirect("/register");
+      res.redirect("/error");
     }
   }
 });
@@ -115,18 +118,22 @@ app.get("/login", (req, res) => {
 
 //RETRIEVE - R
 app.get("/urls", (req, res) => {
+  const userIDCache = req.session.user_id
   let templateVars = {
-    urls: urlDatabase
+    urls: users[userIDCache].urls
   };
   res.render("urls_index", templateVars);
 });
 
 //show url by id
 app.get("/urls/:id", (req, res) => {
+  const userIDCache = req.session.user_id
   let templateVars = {
     shortURL: req.params.id,
-    longURL: urlDatabase[req.params.id]
-  };
+    longURL: users[userIDCache].urls[req.params.id],
+    usersUrls: users[userIDCache].urls
+    };
+  
   console.log(templateVars);
   res.render("urls_show", templateVars);
 });
@@ -135,12 +142,13 @@ app.get("/error", (req, res) => {
   res.render("error");
 
 });
-app.get('/users', (req, res) => res.json(urlDatabase))
+app.get('/users', (req, res) => res.json(users))
 
 //redirect to id if id is valid in database
-app.get("/:id", (req, res) => {
-  let longURL = urlDatabase[req.params.id];
-  if (urlDatabase[req.params.id] === undefined) {
+app.get("/r/:id", (req, res) => {
+  const userIDCache = req.session.user_id;
+  let longURL = users[userIDCache].urls[req.params.id];
+  if (users[userIDCache].urls[req.params.id] === undefined) {
     res.redirect("/error");
   } else {
     res.redirect(longURL);
@@ -149,15 +157,16 @@ app.get("/:id", (req, res) => {
 //UPDATE - U
 
 app.put("/urls/:id", (req, res) => {
-
-  urlDatabase[req.params.id] = req.body.updateURL;
+  const userIDCache = req.session.user_id;
+  users[userIDCache].urls[req.params.id] = req.body.updateURL;
   res.redirect(`/urls/${req.params.id}`);
 })
 
 //DELETE -D
 app.delete("/urls/:shortURL", (req, res) => {
-  if (urlDatabase.hasOwnProperty(req.params.shortURL)) {
-    delete urlDatabase[req.params.shortURL];
+  const userIDCache = req.session.user_id;
+  if (users[userIDCache].urls.hasOwnProperty(req.params.shortURL)) {
+    delete users[userIDCache].urls[req.params.shortURL];
   }
   res.redirect(302, "/urls");
 
@@ -187,3 +196,7 @@ const generateRandomID = () => {
     randomID += possible.charAt(Math.floor(Math.random() * possible.length));
   return randomID;
 };
+
+
+
+

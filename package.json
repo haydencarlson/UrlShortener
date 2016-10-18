@@ -9,9 +9,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^0.8.7",
     "body-parser": "^1.15.2",
     "clipboard": "^1.5.12",
     "cookie-parser": "^1.4.3",
+    "cookie-session": "^2.0.0-alpha.1",
     "cookies": "^0.6.1",
     "ejs": "^2.5.2",
     "express": "^4.14.0",

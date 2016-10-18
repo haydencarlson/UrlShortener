@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -41,10 +42,17 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+    <form id="logoutmethod" method="post" action="/logout">
+    <button id="logout_trigger">Logout</button>
+    
+    </form>
       <ul class="nav navbar-nav">
         
         <div class="container-fluid">
   <a id="modal_trigger" href="#modal" class="btn">Click here to Login or register</a>
+
+
 
   <div id="modal" class="popupContainer" style="display:none;">
     <header class="popupHeader">
@@ -108,9 +116,6 @@
       <!-- Register Form -->
       <div class="user_register">
         <form id="registerform" method="post" action="/register">
-          <label>Full Name</label>
-          <input type="text" />
-          <br />
 
           <label>Email Address</label>
           <input type="email" name="email" />
@@ -187,7 +192,7 @@
     <div id="formContainer">
     <form action="/urls" method="POST">
     <p class="p__"> Shorten Below: </p>
- 
+
 
 
 
