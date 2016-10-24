@@ -37,7 +37,6 @@ p {
 }
 body {
   background: url(thebackground.jpg) no-repeat center center fixed;
-   
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -134,16 +133,7 @@ margin: 0px auto;
 
 }
 .register__button {
-  font-family:Montserrat;
-  font-size: 20px;
-  font-weight: bold;
-  outline: 0;
-  transition-duration: 0.8s;
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
-  border-radius: 6px;
-  width : 200px; 
-  height: 70px;
+ display:none;
 }
 
 

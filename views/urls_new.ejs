@@ -8,7 +8,7 @@
   <script type="text/javascript" src="jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="jquery.leanModal.min.js"></script>
 <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
-<link type="text/css" rel="stylesheet" href="style.css" />
+<link type="text/css" rel="stylesheet" href="loginform.css" />
 
     <link rel="stylesheet" type="text/css" href="/styles.css">
 
@@ -66,13 +66,13 @@
         <div class="">
           <a href="#" class="social_box fb">
             <span class="icon"><i class="fa fa-facebook"></i></span>
-            <span class="icon_title">Connect with Facebook</span>
+            <span class="icon_title">Coming soon..</span>
             
           </a>
 
           <a href="#" class="social_box google">
             <span class="icon"><i class="fa fa-google-plus"></i></span>
-            <span class="icon_title">Connect with Google</span>
+            <span class="icon_title">Coming soon..</span>
           </a>
         </div>
 
@@ -89,7 +89,7 @@
 
       <!-- Username & Password Login form -->
       <div class="user_login">
-        <form id="foo" method="post" action="/login">
+        <form id="loginform" method="post" action="/login">
           <label>Email / Username</label>
           <input type="email" name="email" />
           <br />
@@ -106,7 +106,7 @@
           <div class="action_btns">
           
             <div class="one_half"><a href="#" class="btn back_btn"><i class="fa fa-angle-double-left"></i> Back</a></div>
-            <div class="one_half last"><a href="" onclick="document.getElementById('foo').submit(); return false;" class="btn btn_red">Login</a></div>
+            <div class="one_half last"><a href="" onclick="document.getElementById('loginform').submit(); return false;" class="btn btn_red">Login</a></div>
           </div>
         </form>
 
@@ -118,7 +118,7 @@
         <form id="registerform" method="post" action="/register">
 
           <label>Email Address</label>
-          <input type="email" name="email" />
+          <input type="email" required name="email" />
           <br />
 
           <label>Password</label>
@@ -129,10 +129,11 @@
             <input id="send_updates" type="checkbox" />
             <label for="send_updates">Send me occasional email updates</label>
           </div>
+          <button id="registerbutton" style="display: none;" type="submit"> </button>
 
           <div class="action_btns">
             <div class="one_half"><a href="#" class="btn back_btn"><i class="fa fa-angle-double-left"></i> Back</a></div>
-            <div class="one_half last"><a href="" onclick="document.getElementById('registerform').submit(); return false;" class="btn btn_red">Register</a></div>
+            <div class="one_half last"><a href="" type="email" required onclick="document.getElementById('registerbutton').click(); return false;" class="btn btn_red">Register</a></div>
           </div>
         </form>
       </div>
