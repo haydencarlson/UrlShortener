@@ -7,6 +7,7 @@
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
   <script type="text/javascript" src="jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="jquery.leanModal.min.js"></script>
+<script type="text/javascript" src="login.js"></script>
 <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
 <link type="text/css" rel="stylesheet" href="loginform.css" />
 
@@ -25,7 +26,7 @@
 </div>
 
 
-    <!-- Brand and toggle get grouped for better mobile display -->
+    <!-- Brand and toggle get sgrouped for better mobile display -->
     <div class="navbar-header">
 
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -43,10 +44,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-    <form id="logoutmethod" method="post" action="/logout">
-    <button id="logout_trigger">Logout</button>
-    
-    </form>
+    <%-include partials/username %>
       <ul class="nav navbar-nav">
         
         <div class="container-fluid">
@@ -140,38 +138,6 @@
     </section>
   </div>
 </div>
-
-<script type="text/javascript">
-  $("#modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
-
-  $(function(){
-    // Calling Login Form
-    $("#login_form").click(function(){
-      $(".social_login").hide();
-      $(".user_login").show();
-      return false;
-    });
-
-    // Calling Register Form
-    $("#register_form").click(function(){
-      $(".social_login").hide();
-      $(".user_register").show();
-      $(".header_title").text('Register');
-      return false;
-    });
-
-    // Going back to Social Forms
-    $(".back_btn").click(function(){
-      $(".user_login").hide();
-      $(".user_register").hide();
-      $(".social_login").show();
-      $(".header_title").text('Login');
-      return false;
-    });
-
-  })
-</script>
-        
 
       </ul>
       <form class="navbar-form navbar-left">

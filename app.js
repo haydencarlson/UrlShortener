@@ -6,10 +6,7 @@ const PORT = app.set('port', 8080);
 const methodOverride = require('method-override');
 const cookieSession = require('cookie-session')
 
-var urlDatabase = {
-  "b2xVn2": "http://www.lighthouselabs.ca",
-  "9sm5xK": "http://www.google.com"
-};
+
 var users = {};
 
 app.set('view engine', 'ejs');
@@ -44,7 +41,7 @@ app.post("/urls", (req, res) => {
 });
 
 app.post("/register", (req, res) => {
-  const randomuserid = generateRandomID();
+  const randomuserid = generateRandomString();
 
   for (let userID in users) {
     let user = users[userID];
@@ -155,10 +152,3 @@ for (let i = 0; i < 6; i++)
   return randomString;
 };
 
-const generateRandomID = () => {
-  let randomID = "";
-  var possible = "0123456789";
-  for (let i = 0; i < 5; i++)
-    randomID += possible.charAt(Math.floor(Math.random() * possible.length));
-  return randomID;
-};

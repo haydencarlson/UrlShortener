@@ -6,6 +6,7 @@
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
   <script type="text/javascript" src="jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="jquery.leanModal12.min.js"></script>
+<script type="text/javascript" src="login.js"></script>
 <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
 <link type="text/css" rel="stylesheet" href="style.css" />
 
@@ -134,37 +135,6 @@
     </section>
   </div>
 </div>
-
-<script type="text/javascript">
-  $("#modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
-
-  $(function(){
-    // Calling Login Form
-    $("#login_form").click(function(){
-      $(".social_login").hide();
-      $(".user_login").show();
-      return false;
-    });
-
-    // Calling Register Form
-    $("#register_form").click(function(){
-      $(".social_login").hide();
-      $(".user_register").show();
-      $(".header_title").text('Register');
-      return false;
-    });
-
-    // Going back to Social Forms
-    $(".back_btn").click(function(){
-      $(".user_login").hide();
-      $(".user_register").hide();
-      $(".social_login").show();
-      $(".header_title").text('Login');
-      return false;
-    });
-
-  })
-</script>
         
 
       </ul>
