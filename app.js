@@ -30,15 +30,15 @@ app.get("/register", (req, res) => {
 app.post("/urls", (req, res) => {
   var shortURL = generateRandomString(req.body.longURL);
   const userIDCache = req.session.user_id;
-  if (userIDCache !== undefined) {
+  if (userIDCache === undefined) {
+    res.send("Not Logged In");
+    
+  } else {
     users[userIDCache].urls[shortURL] = req.body.longURL;
     urlDatabase[shortURL] = req.body.longURL;
     console.log(urlDatabase);
     res.redirect(302, `urls/${shortURL}`);
-  } else {
-    res.send("Not Logged In");
   }
-  
 });
 
 app.post("/register", (req, res) => {
