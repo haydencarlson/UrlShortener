@@ -5,8 +5,7 @@ const app = express();
 const PORT = app.set('port', 8080);
 const methodOverride = require('method-override');
 const cookieSession = require('cookie-session')
-
-
+var urlDatabase = {};
 var users = {};
 
 app.set('view engine', 'ejs');
@@ -33,9 +32,12 @@ app.post("/urls", (req, res) => {
   const userIDCache = req.session.user_id;
   if (userIDCache !== undefined) {
     users[userIDCache].urls[shortURL] = req.body.longURL;
+    urlDatabase[shortURL] = req.body.longURL;
+
+    console.log(urlDatabase);
     res.redirect(302, `urls/${shortURL}`);
   } else {
-    res.render("error");
+    res.send("Not Logged In");
   }
   
 });
@@ -46,15 +48,15 @@ app.post("/register", (req, res) => {
   for (let userID in users) {
     let user = users[userID];
     if (user.email === req.body.email) {
-      return res.redirect(404, "error");
+      return res.redirect(400, "error");
     }
   }
 
-  if (req.body.email === "" || undefined) {
-    res.redirect('error');
+  if (!req.body.email) {
+    res.send("Please enter an email");
 
-  } else if (req.body.password === "" || undefined) {
-    res.redirect('error');
+  } else if (!req.body.password) {
+    res.send("Please enter a password");
   }
 
   req.session.user_id = randomuserid;
@@ -66,8 +68,7 @@ app.post("/register", (req, res) => {
 
   }
   users[randomuserid] = user;
-  res.redirect("login");
-
+  res.redirect("/");
 });
 
 app.post("/logout", (req, res) => {
@@ -113,16 +114,20 @@ app.get("/error", (req, res) => {
 
 });
 
-app.get('/users', (req, res) => res.json(users))
-
-app.get("/r/:id", (req, res) => {
+app.get("/u/:id", (req, res) => {
   const userIDCache = req.session.user_id;
-  let longURL = users[userIDCache].urls[req.params.id];
-  if (users[userIDCache].urls[req.params.id] === undefined) {
-    res.redirect("/error");
-  } else {
+  if (!userIDCache) {
+    var longURL1 = urlDatabase[req.params.id];
+    console.log(longURL1);
+    res.redirect(longURL1)
+  } else   {
+
+    var longURL = users[userIDCache].urls[req.params.id];
     res.redirect(longURL);
   }
+  
+    
+  
 });
 
 app.put("/urls/:id", (req, res) => {
