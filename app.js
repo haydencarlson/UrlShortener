@@ -33,7 +33,6 @@ app.post("/urls", (req, res) => {
   if (userIDCache !== undefined) {
     users[userIDCache].urls[shortURL] = req.body.longURL;
     urlDatabase[shortURL] = req.body.longURL;
-
     console.log(urlDatabase);
     res.redirect(302, `urls/${shortURL}`);
   } else {
